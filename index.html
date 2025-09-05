@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Progression Solver</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <h1>Progression Solver</h1>
+    
+    <div class="container">
+        <div class="progression-section">
+            <h2>Arithmetic Progression (AP)</h2>
+            <div class="input-group">
+                <label for="ap-a">First Term (a):</label>
+                <input type="number" id="ap-a" placeholder="Enter first term">
+            </div>
+            <div class="input-group">
+                <label for="ap-d">Common Difference (d):</label>
+                <input type="number" id="ap-d" placeholder="Enter common difference">
+            </div>
+            <div class="input-group">
+                <label for="ap-n">Number of Terms (n):</label>
+                <input type="number" id="ap-n" placeholder="Enter number of terms">
+            </div>
+            <button onclick="calculateAP()">Calculate AP</button>
+            <div class="output" id="ap-output"></div>
+        </div>
+
+        <div class="progression-section">
+            <h2>Geometric Progression (GP)</h2>
+            <div class="input-group">
+                <label for="gp-a">First Term (a):</label>
+                <input type="number" id="gp-a" placeholder="Enter first term">
+            </div>
+            <div class="input-group">
+                <label for="gp-r">Common Ratio (r):</label>
+                <input type="number" id="gp-r" placeholder="Enter common ratio">
+            </div>
+            <div class="input-group">
+                <label for="gp-n">Number of Terms (n):</label>
+                <input type="number" id="gp-n" placeholder="Enter number of terms">
+            </div>
+            <button onclick="calculateGP()">Calculate GP</button>
+            <div class="output" id="gp-output"></div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
