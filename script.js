@@ -1,74 +1,80 @@
-// Function to calculate Arithmetic Progression (AP)
-function calculateAP() {
-    const a = parseFloat(document.getElementById('ap-a').value);
-    const d = parseFloat(document.getElementById('ap-d').value);
-    const n = parseInt(document.getElementById('ap-n').value);
-    const outputDiv = document.getElementById('ap-output');
+// Get references to the HTML elements
+const currentInputDisplay = document.getElementById('current-input');
+const resultDisplay = document.getElementById('result-display');
+const keypad = document.querySelector('.keypad');
 
-    // Input validation
-    if (isNaN(a) || isNaN(d) || isNaN(n) || n <= 0) {
-        outputDiv.innerHTML = '<span style="color:red;">Please enter valid numbers for all fields. Number of terms (n) must be greater than 0.</span>';
+// State variables for the calculator's logic
+let currentExpression = '';
+let isResultDisplayed = false;
+
+// Add a single event listener to the keypad container
+keypad.addEventListener('click', (event) => {
+    // Check if the clicked element is a button
+    const button = event.target.closest('button');
+    if (!button) {
         return;
     }
 
-    // Calculate nth term and sum
-    const nthTerm = a + (n - 1) * d;
-    const sum = (n / 2) * (2 * a + (n - 1) * d);
-    
-    // Generate the sequence of terms
-    let sequence = '';
-    for (let i = 0; i < n; i++) {
-        sequence += (a + i * d).toFixed(2);
-        if (i < n - 1) {
-            sequence += ', ';
+    const value = button.dataset.value;
+
+    // Reset for a new calculation if a result was just shown
+    if (isResultDisplayed && value !== 'del' && value !== '=' && value !== 'clear') {
+        currentExpression = '';
+        isResultDisplayed = false;
+    }
+
+    switch (value) {
+        case 'clear':
+            currentExpression = '';
+            resultDisplay.textContent = '0';
+            isResultDisplayed = false;
+            break;
+        case 'del':
+            currentExpression = currentExpression.slice(0, -1);
+            if (currentExpression === '') {
+                resultDisplay.textContent = '0';
+            }
+            break;
+        case '=':
+            calculate();
+            isResultDisplayed = true;
+            break;
+        case 'sin':
+        case 'cos':
+        case 'tan':
+            currentExpression += `Math.${value}(`;
+            break;
+        case 'sqrt':
+            currentExpression += 'Math.sqrt(';
+            break;
+        case '^':
+            currentExpression += '**';
+            break;
+        default:
+            currentExpression += value;
+            break;
+    }
+
+    currentInputDisplay.textContent = currentExpression;
+});
+
+/**
+ * Calculates the expression and displays the result.
+ */
+function calculate() {
+    try {
+        // Simple string sanitization to prevent common security issues with eval()
+        const sanitizedExpression = currentExpression.replace(/[^0-9+\-*/().Mathsin()cos()tan()sqrt()**]/g, '');
+        
+        // A dedicated math parser is safer, but for this example, eval is used with caution.
+        const result = eval(sanitizedExpression);
+
+        if (isNaN(result) || !isFinite(result)) {
+            resultDisplay.textContent = 'Error';
+        } else {
+            resultDisplay.textContent = result;
         }
+    } catch (error) {
+        resultDisplay.textContent = 'Error';
     }
-    
-    // Display results
-    outputDiv.innerHTML = `
-        <p><strong>Sequence:</strong> ${sequence}</p>
-        <p><strong>n-th Term ($a_n$):</strong> ${nthTerm.toFixed(2)}</p>
-        <p><strong>Sum of Terms ($S_n$):</strong> ${sum.toFixed(2)}</p>
-    `;
-}
-
-// Function to calculate Geometric Progression (GP)
-function calculateGP() {
-    const a = parseFloat(document.getElementById('gp-a').value);
-    const r = parseFloat(document.getElementById('gp-r').value);
-    const n = parseInt(document.getElementById('gp-n').value);
-    const outputDiv = document.getElementById('gp-output');
-
-    // Input validation
-    if (isNaN(a) || isNaN(r) || isNaN(n) || n <= 0) {
-        outputDiv.innerHTML = '<span style="color:red;">Please enter valid numbers for all fields. Number of terms (n) must be greater than 0.</span>';
-        return;
-    }
-
-    // Calculate nth term
-    const nthTerm = a * Math.pow(r, n - 1);
-
-    // Calculate sum of terms
-    let sum = 0;
-    if (r === 1) {
-        sum = a * n;
-    } else {
-        sum = a * (1 - Math.pow(r, n)) / (1 - r);
-    }
-
-    // Generate the sequence of terms
-    let sequence = '';
-    for (let i = 0; i < n; i++) {
-        sequence += (a * Math.pow(r, i)).toFixed(2);
-        if (i < n - 1) {
-            sequence += ', ';
-        }
-    }
-    
-    // Display results
-    outputDiv.innerHTML = `
-        <p><strong>Sequence:</strong> ${sequence}</p>
-        <p><strong>n-th Term ($a_n$):</strong> ${nthTerm.toFixed(2)}</p>
-        <p><strong>Sum of Terms ($S_n$):</strong> ${sum.toFixed(2)}</p>
-    `;
 }

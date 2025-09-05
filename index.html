@@ -3,50 +3,55 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Progression Solver</title>
+    <title>Scientific Calculator</title>
     <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
 </head>
 <body>
-    <h1>Progression Solver</h1>
-    
-    <div class="container">
-        <div class="progression-section">
-            <h2>Arithmetic Progression (AP)</h2>
-            <div class="input-group">
-                <label for="ap-a">First Term (a):</label>
-                <input type="number" id="ap-a" placeholder="Enter first term">
-            </div>
-            <div class="input-group">
-                <label for="ap-d">Common Difference (d):</label>
-                <input type="number" id="ap-d" placeholder="Enter common difference">
-            </div>
-            <div class="input-group">
-                <label for="ap-n">Number of Terms (n):</label>
-                <input type="number" id="ap-n" placeholder="Enter number of terms">
-            </div>
-            <button onclick="calculateAP()">Calculate AP</button>
-            <div class="output" id="ap-output"></div>
-        </div>
 
-        <div class="progression-section">
-            <h2>Geometric Progression (GP)</h2>
-            <div class="input-group">
-                <label for="gp-a">First Term (a):</label>
-                <input type="number" id="gp-a" placeholder="Enter first term">
-            </div>
-            <div class="input-group">
-                <label for="gp-r">Common Ratio (r):</label>
-                <input type="number" id="gp-r" placeholder="Enter common ratio">
-            </div>
-            <div class="input-group">
-                <label for="gp-n">Number of Terms (n):</label>
-                <input type="number" id="gp-n" placeholder="Enter number of terms">
-            </div>
-            <button onclick="calculateGP()">Calculate GP</button>
-            <div class="output" id="gp-output"></div>
+<div class="calculator-container">
+    <div class="calculator">
+        <div class="display">
+            <div id="current-input" class="current-input"></div>
+            <div id="result-display" class="result-display">0</div>
+        </div>
+        <div class="keypad">
+            <!-- First Row -->
+            <button class="btn btn-clear">C</button>
+            <button class="btn btn-operator" data-value="del">&leftarrow;</button>
+            <button class="btn btn-operator" data-value="/">÷</button>
+
+            <!-- Second Row -->
+            <button class="btn btn-function" data-value="sin">sin</button>
+            <button class="btn btn-number" data-value="7">7</button>
+            <button class="btn btn-number" data-value="8">8</button>
+            <button class="btn btn-number" data-value="9">9</button>
+            <button class="btn btn-operator" data-value="*">&times;</button>
+
+            <!-- Third Row -->
+            <button class="btn btn-function" data-value="cos">cos</button>
+            <button class="btn btn-number" data-value="4">4</button>
+            <button class="btn btn-number" data-value="5">5</button>
+            <button class="btn btn-number" data-value="6">6</button>
+            <button class="btn btn-operator" data-value="-">-</button>
+
+            <!-- Fourth Row -->
+            <button class="btn btn-function" data-value="tan">tan</button>
+            <button class="btn btn-number" data-value="1">1</button>
+            <button class="btn btn-number" data-value="2">2</button>
+            <button class="btn btn-number" data-value="3">3</button>
+            <button class="btn btn-operator" data-value="+">+</button>
+
+            <!-- Fifth Row -->
+            <button class="btn btn-function" data-value="sqrt">&radic;</button>
+            <button class="btn btn-function" data-value="^">xʸ</button>
+            <button class="btn btn-number" data-value="0">0</button>
+            <button class="btn btn-number" data-value=".">.</button>
+            <button class="btn btn-equal">=</button>
         </div>
     </div>
+</div>
 
-    <script src="script.js"></script>
+<script src="script.js"></script>
 </body>
 </html>
